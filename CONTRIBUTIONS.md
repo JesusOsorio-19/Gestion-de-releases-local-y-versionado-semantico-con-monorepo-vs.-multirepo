@@ -38,3 +38,6 @@
     Commit: `feat(graficos): Añade script que genera gráficos DOT simples`
 
     Pull request grupal: Añade script que genera gráficos DOT simples #21
+
+
+> La carpeta `branches/` tiene los commits por sprints, para identificarlo tiene los prefijos 1, 2 y 3 que indica el sprint respectivamente.
