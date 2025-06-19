@@ -1,0 +1,31 @@
+From 504cb34093b243be2912e88caa21f32e3070e00c Mon Sep 17 00:00:00 2001
+From: Diego <jesustello192002@gmail.com>
+Date: Sun, 15 Jun 2025 12:54:15 -0500
+Subject: [PATCH 4/6] =?UTF-8?q?feat(dependencias):=20A=C3=B1ade=20archiv?=
+ =?UTF-8?q?o=20con=20dependencias=20necesarias?=
+MIME-Version: 1.0
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
+
+---
+ requirements.txt | 7 +++++++
+ 1 file changed, 7 insertions(+)
+ create mode 100644 requirements.txt
+
+diff --git a/requirements.txt b/requirements.txt
+new file mode 100644
+index 0000000..28a5f4d
+--- /dev/null
++++ b/requirements.txt
+@@ -0,0 +1,7 @@
++black
++flake8
++bandit
++pytest
++pytest-cov
++pytest-mock
++pytest-html
+\ No newline at end of file
+-- 
+2.45.1.windows.1
+

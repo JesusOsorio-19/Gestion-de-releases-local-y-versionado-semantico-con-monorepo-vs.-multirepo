@@ -1,0 +1,47 @@
+From 380cb078e99e29508198255b2f2b1fb044266a5c Mon Sep 17 00:00:00 2001
+From: Diego <jesustello192002@gmail.com>
+Date: Sun, 15 Jun 2025 12:51:39 -0500
+Subject: [PATCH 5/6] =?UTF-8?q?feat(docker):=20A=C3=B1ade=20devconteiner?=
+ =?UTF-8?q?=20con=20dependencias=20necesarias?=
+MIME-Version: 1.0
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
+
+---
+ .devcontainer/devcontainer.json | 23 +++++++++++++++++++++++
+ 1 file changed, 23 insertions(+)
+ create mode 100644 .devcontainer/devcontainer.json
+
+diff --git a/.devcontainer/devcontainer.json b/.devcontainer/devcontainer.json
+new file mode 100644
+index 0000000..1acc906
+--- /dev/null
++++ b/.devcontainer/devcontainer.json
+@@ -0,0 +1,23 @@
++{
++    "name": "tf-devcontainer",
++    "image": "debian:bullseye-slim",
++    "features": {
++        "ghcr.io/devcontainers/features/terraform:1": {},
++        "ghcr.io/devcontainers/features/python:1": {},
++        "ghcr.io/devcontainers/features/common-utils:2": {}
++    },
++    "remoteUser": "root",
++    "customizations": {
++        "vscode": {
++            "extensions": [
++                "hashicorp.terraform",
++                "ms-python.python"
++            ],
++            "settings": {
++                "editor.formatOnPaste": true,
++                "editor.formatOnSave": true
++            }
++        }
++    },
++    "postCreateCommand": "apt-get update && apt-get install -y graphviz"
++}
+\ No newline at end of file
+-- 
+2.45.1.windows.1
+

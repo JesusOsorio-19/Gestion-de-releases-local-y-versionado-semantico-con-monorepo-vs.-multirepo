@@ -1,0 +1,49 @@
+From 0351620425d7546a8c8fc07e3c2a6c2f935e22e3 Mon Sep 17 00:00:00 2001
+From: Diego <jesustello192002@gmail.com>
+Date: Sat, 14 Jun 2025 00:26:41 -0500
+Subject: [PATCH 6/6] =?UTF-8?q?feat(graficos):=20A=C3=B1ade=20script=20q?=
+ =?UTF-8?q?ue=20genera=20gr=C3=A1ficos=20DOT=20simples?=
+MIME-Version: 1.0
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
+
+---
+ src/generar_diagrama.py | 25 +++++++++++++++++++++++++
+ 1 file changed, 25 insertions(+)
+ create mode 100644 src/generar_diagrama.py
+
+diff --git a/src/generar_diagrama.py b/src/generar_diagrama.py
+new file mode 100644
+index 0000000..f165461
+--- /dev/null
++++ b/src/generar_diagrama.py
+@@ -0,0 +1,25 @@
++import os
++import shutil
++import sys
++
++def check_command(cmd):
++    if shutil.which(cmd) is None:
++        print(f"Error: '{cmd}' no está instalado o no está en el PATH.")
++        sys.exit(1)
++
++def generar_diagrama(path, output):
++    
++    try:
++        os.chdir(path)
++        os.system('terraform init')
++        result = os.system(f'terraform graph | dot -Tpng > {output}')
++        if result != 0:
++            print(f"Error generando el diagrama en {path}")
++    except Exception as e:
++        print(f"Ocurrió un error: {e}")
++
++check_command('terraform')
++check_command('dot')
++
++generar_diagrama('../iac/monorepo', 'graph-monorepo.png')
++generar_diagrama('../iac/multirepo/umbrella-repo', 'graph-multirepo.png') 
+\ No newline at end of file
+-- 
+2.45.1.windows.1
+

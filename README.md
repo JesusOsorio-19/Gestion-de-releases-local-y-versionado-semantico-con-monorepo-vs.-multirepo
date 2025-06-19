@@ -1,14 +1,16 @@
 # Proyecto 13: Gestión de releases local y versionado semántico con monorepo vs. multirepo.
 
-Jesus Diego Osorio Tello - jesus.osorio.t@uni.pe
+### Jesus Diego Osorio Tello - jesus.osorio.t@uni.pe
 
 Con mi grupo trabajamos en una organización de GitHub, en el cual creamos nuestro repositorio para esta PC3: https://github.com/grupo10-CC3S2
 
 Link del repositorio principal de la PC3: https://github.com/grupo10-CC3S2/Proyecto13-PC3.git
 
+## Sprint 1
+
 Hasta el momento en el Sprint 1 me he encargado de implementar los hooks `pre-commit` y `commit-msg`, los cuales nos hacen tener commits que sigan las convenciones. También implementé el script `validate.sh` que automatiza la validación de nuestros archivos Terraform.
 
-## Instrucciones
+### Instrucciones
 
 - Para clonar mi repositorio, usamos el comando `git clone`.
 
@@ -37,3 +39,10 @@ Hasta el momento en el Sprint 1 me he encargado de implementar los hooks `pre-co
     ./validate.sh
     ```
 
+## Sprint 2
+
+### Instrucciones
+
+- Los archivos de configuración inicial funcionaran cuando sea agregado a nuestro repositorio principal.
+
+- Para nuestro script `generar_diagrama.py` solo basta con ejecutarlo y se generarán las imágenes DOT.

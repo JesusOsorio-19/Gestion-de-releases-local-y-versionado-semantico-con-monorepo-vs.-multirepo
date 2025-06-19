@@ -1,0 +1,30 @@
+From a0cf603053bff5f8c72cbca4de0166aee1415a33 Mon Sep 17 00:00:00 2001
+From: Diego <jesustello192002@gmail.com>
+Date: Sat, 14 Jun 2025 00:11:39 -0500
+Subject: [PATCH 3/6] =?UTF-8?q?feat(bandit):=20A=C3=B1ade=20archivo=20pa?=
+ =?UTF-8?q?ra=20detectar=20vulnerabilidades=20de=20seguridad=20en=20c?=
+ =?UTF-8?q?=C3=B3digo=20python?=
+MIME-Version: 1.0
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
+
+---
+ .bandit | 6 ++++++
+ 1 file changed, 6 insertions(+)
+ create mode 100644 .bandit
+
+diff --git a/.bandit b/.bandit
+new file mode 100644
+index 0000000..450852e
+--- /dev/null
++++ b/.bandit
+@@ -0,0 +1,6 @@
++[bandit]
++exclude = .git,.pytest_cache,.venv,venv,.terraform,tests
++skips = B101,B311
++severity-level = MEDIUM
++confidence-level = MEDIUM
++recursive = True
+-- 
+2.45.1.windows.1
+

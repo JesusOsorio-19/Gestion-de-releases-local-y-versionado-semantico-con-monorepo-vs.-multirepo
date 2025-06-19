@@ -1,0 +1,39 @@
+From 3e7ce967ff92a95f9827267973fda83d60f1eccd Mon Sep 17 00:00:00 2001
+From: Diego <jesustello192002@gmail.com>
+Date: Sat, 14 Jun 2025 00:10:01 -0500
+Subject: [PATCH 2/6] =?UTF-8?q?feat(flake):=20A=C3=B1ade=20archivo=20par?=
+ =?UTF-8?q?a=20an=C3=A1lisis=20de=20calidad=20de=20c=C3=B3digo=20python?=
+MIME-Version: 1.0
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
+
+---
+ .flake8 | 16 ++++++++++++++++
+ 1 file changed, 16 insertions(+)
+ create mode 100644 .flake8
+
+diff --git a/.flake8 b/.flake8
+new file mode 100644
+index 0000000..d6b6fde
+--- /dev/null
++++ b/.flake8
+@@ -0,0 +1,16 @@
++[flake8]
++max-line-length = 120
++exclude = 
++    .git,
++    __pycache__,
++    build,
++    dist,
++    .venv,
++    venv,
++    .terraform
++
++ignore = 
++    E203,
++    W503,
++    E501,
++    F401 
+-- 
+2.45.1.windows.1
+

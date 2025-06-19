@@ -1,0 +1,61 @@
+From ecd842c58d1ea29b167582a0c2b4c09657884fa9 Mon Sep 17 00:00:00 2001
+From: Diego <jesustello192002@gmail.com>
+Date: Sun, 8 Jun 2025 18:49:07 -0500
+Subject: [PATCH 3/3] feat(tf): validar formato y sintaxis de archivos .tf
+
+---
+ script/validate.sh | 43 +++++++++++++++++++++++++++++++++++++++++++
+ 1 file changed, 43 insertions(+)
+
+diff --git a/script/validate.sh b/script/validate.sh
+index e69de29..66b60c5 100644
+--- a/script/validate.sh
++++ b/script/validate.sh
+@@ -0,0 +1,43 @@
++#!/bin/bash
++
++set -e
++
++echo  "Validación de módulos de Terraform"
++
++validate_terraform_dir() {
++  local dir="$1"
++  echo "Validando directorio: $dir"
++  
++  cd "$dir" 
++  
++  echo "Verifica formato"
++  terraform fmt -check -diff
++
++  echo "Valida sintaxis"
++  terraform init -backend=false > /dev/null
++  terraform validate
++
++  cd - > /dev/null
++}
++
++# Validar cada modulo de Terraform
++
++echo "Validando Monorepo"
++for module in network-module compute-module storage-module; do
++    if [ -d "iac/monorepo/$module" ]; then
++        validate_terraform_dir "iac/monorepo/$module"
++    else
++        echo "Módulo $module no encontrado en iac/monorepo/"
++    fi
++done
++
++echo "Validando Multirepo"
++for repo in compute-repo network-repo storage-repo; do
++    if [ -d "iac/multirepo/$repo" ]; then
++        validate_terraform_dir "iac/multirepo/$repo"
++    else
++        echo "Repo $repo no encontrado en iac/multirepo/"
++    fi
++done
++
++echo "Validación completada exitosa."
+\ No newline at end of file
+-- 
+2.45.1.windows.1
+

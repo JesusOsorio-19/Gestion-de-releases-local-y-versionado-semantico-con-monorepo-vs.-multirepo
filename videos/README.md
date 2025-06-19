@@ -12,3 +12,14 @@
 
     ![](/imgs/validate.png)
 
+## Sprint2 - Jesus_Osorio
+
+[Video Sprint 2](https://drive.google.com/file/d/1ZKJEsQVeYRvGJ-uY3dMgT9Jh1GeNBl-n/view?usp=drive_link)
+
+- Imagen de monorepo.
+
+    ![](/imgs/graph-monorepo.png)
+
+- Imagen de multi-repo
+
+    ![](/imgs/graph-multirepo.png)
