@@ -1,0 +1,127 @@
+From fbdda58ac16bf33dcdac8f116ecd8073b008e52c Mon Sep 17 00:00:00 2001
+From: Diego <jesustello192002@gmail.com>
+Date: Thu, 19 Jun 2025 23:22:09 -0500
+Subject: [PATCH] =?UTF-8?q?feat(verifica):=20A=C3=B1ade=20script=20que=20v?=
+ =?UTF-8?q?erifica=20el=20estado=20de=20archivos=20terraform?=
+MIME-Version: 1.0
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
+
+---
+ src/generar_diagrama.py | 17 ++++++-----
+ src/verificar_estado.py | 63 +++++++++++++++++++++++++++++++++++++++++
+ 2 files changed, 73 insertions(+), 7 deletions(-)
+ create mode 100644 src/verificar_estado.py
+
+diff --git a/src/generar_diagrama.py b/src/generar_diagrama.py
+index f165461..28b770d 100644
+--- a/src/generar_diagrama.py
++++ b/src/generar_diagrama.py
+@@ -2,24 +2,27 @@ import os
+ import shutil
+ import sys
+ 
++
+ def check_command(cmd):
+     if shutil.which(cmd) is None:
+         print(f"Error: '{cmd}' no está instalado o no está en el PATH.")
+         sys.exit(1)
+ 
++
+ def generar_diagrama(path, output):
+-    
++
+     try:
+         os.chdir(path)
+-        os.system('terraform init')
+-        result = os.system(f'terraform graph | dot -Tpng > {output}')
++        os.system("terraform init")
++        result = os.system(f"terraform graph | dot -Tpng > {output}")
+         if result != 0:
+             print(f"Error generando el diagrama en {path}")
+     except Exception as e:
+         print(f"Ocurrió un error: {e}")
+ 
+-check_command('terraform')
+-check_command('dot')
+ 
+-generar_diagrama('../iac/monorepo', 'graph-monorepo.png')
+-generar_diagrama('../iac/multirepo/umbrella-repo', 'graph-multirepo.png') 
+\ No newline at end of file
++check_command("terraform")
++check_command("dot")
++
++generar_diagrama("../iac/monorepo", "graph-monorepo.png")
++generar_diagrama("../iac/multirepo/umbrella-repo", "graph-multirepo.png")
+diff --git a/src/verificar_estado.py b/src/verificar_estado.py
+new file mode 100644
+index 0000000..6c0377c
+--- /dev/null
++++ b/src/verificar_estado.py
+@@ -0,0 +1,63 @@
++import os
++import json
++import sys
++
++
++def check_tfstate_files():
++    results = {"modules": {}, "total_resources": 0, "status": "ok"}
++
++    tfstate_paths = []
++
++    monorepo_path = "../iac/monorepo"
++    if os.path.exists(monorepo_path):
++        for root, dirs, files in os.walk(monorepo_path):
++            for file in files:
++                if file.endswith(".tfstate"):
++                    tfstate_paths.append(os.path.join(root, file))
++
++    multirepo_path = "../iac/multirepo/umbrella-repo"
++    if os.path.exists(multirepo_path):
++        for root, dirs, files in os.walk(multirepo_path):
++            for file in files:
++                if file.endswith(".tfstate"):
++                    tfstate_paths.append(os.path.join(root, file))
++
++    # Analizar cada archivo
++    for tfstate_path in tfstate_paths:
++        module_name = os.path.basename(os.path.dirname(tfstate_path))
++
++        try:
++            with open(tfstate_path, "r") as f:
++                state_data = json.load(f)
++
++            resource_count = len(state_data.get("resources", []))
++            results["modules"][module_name] = {
++                "path": tfstate_path,
++                "resources": resource_count,
++                "terraform_version": state_data.get("terraform_version",
++                                                    "unknown"),
++            }
++            results["total_resources"] += resource_count
++
++        except Exception as e:
++            results["modules"][module_name] = {"path": tfstate_path, "error":
++                                               str(e)}
++            results["status"] = "error"
++
++    return results
++
++
++def generate_report(output_file=None):
++    results = check_tfstate_files()
++
++    output_file = "report.json"
++    with open(output_file, "w") as f:
++        json.dump(results, f, indent=2)
++    print(f"Reporte guardado: {output_file}")
++
++    return 0 if results["status"] == "ok" else 1
++
++
++if __name__ == "__main__":
++    exit_code = generate_report()
++    sys.exit(exit_code)
+-- 
+2.45.1.windows.1
+

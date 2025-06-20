@@ -1,0 +1,42 @@
+From 388d4ccaf58f2dcedcba0909a749c208f25bf1b5 Mon Sep 17 00:00:00 2001
+From: Diego <jesustello192002@gmail.com>
+Date: Thu, 19 Jun 2025 23:29:45 -0500
+Subject: [PATCH] =?UTF-8?q?feat(pre-push):=20A=C3=B1ade=20hook=20pre-push?=
+ =?UTF-8?q?=20que=20invoca=20verificar=5Festado?=
+MIME-Version: 1.0
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
+
+---
+ hooks/pre-push | 18 ++++++++++++++++++
+ 1 file changed, 18 insertions(+)
+ create mode 100644 hooks/pre-push
+
+diff --git a/hooks/pre-push b/hooks/pre-push
+new file mode 100644
+index 0000000..3a32b71
+--- /dev/null
++++ b/hooks/pre-push
+@@ -0,0 +1,18 @@
++#!/bin/sh
++
++echo "Validando estados Terraform"
++
++cd src
++
++# Ejecutar validación
++python verificar_estado.py
++
++# Verificar resultado
++if [ $? -ne 0 ]; then
++    echo "Validación falló - Push bloqueado"
++    echo "Usa 'git push --no-verify' para omitir"
++    exit 1
++fi
++
++echo "Validación completada - Procediendo con push"
++exit 0
+\ No newline at end of file
+-- 
+2.45.1.windows.1
+

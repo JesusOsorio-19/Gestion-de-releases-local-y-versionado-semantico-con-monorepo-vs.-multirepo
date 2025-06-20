@@ -46,3 +46,17 @@ Hasta el momento en el Sprint 1 me he encargado de implementar los hooks `pre-co
 - Los archivos de configuración inicial funcionaran cuando sea agregado a nuestro repositorio principal.
 
 - Para nuestro script `generar_diagrama.py` solo basta con ejecutarlo y se generarán las imágenes DOT.
+
+## Sprint 3
+
+### Instrucciones
+
+- Para generar el report.json basta con ejecutar el scrip `verificar_estado.py`.
+
+- El script `pre-push` lo copiamos a la carpeta `.git/hooks` 
+
+    ```bash
+    cp hooks/pre-push .git/hooks/pre-push
+    chmod +x .git/hooks/pre-push
+    .git/hooks/pre-push
+    ```

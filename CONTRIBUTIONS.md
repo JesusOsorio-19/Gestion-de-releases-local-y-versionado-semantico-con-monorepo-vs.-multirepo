@@ -39,5 +39,14 @@
 
     Pull request grupal: Añade script que genera gráficos DOT simples #21
 
+## Sprint 3
+
+- 2025-06-19: Implementé `verificar_estado.py` y `hooks/pre-push`, que se encargar de verificar los .tfstate y de invocar el script en python antes de cada push, respectivamente.
+
+    Commit: `feat(verifica): Añade script que verifica el estado de archivos terraform` 
+    Commit: `feat(pre-push): Añade hook pre-push que invoca verificar_estado` 
+
+    Pull request grupal: Añade script que verifica el estado de archivos terraform #34
+    Pull request grupal: Añade hook pre-push que invoca verificar_estado #33
 
 > La carpeta `branches/` tiene los commits por sprints, para identificarlo tiene los prefijos 1, 2 y 3 que indica el sprint respectivamente.
